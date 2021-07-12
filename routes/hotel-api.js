@@ -7,7 +7,7 @@ const router = express.Router();
 
 //Create A Booking
 router.post('/', (req, res) => {
-    const memberModel = {
+    const bookingModel = {
         id: uuidv4(),
         roomId:	uuidv4(),
         title: req.body.title,
@@ -18,12 +18,12 @@ router.post('/', (req, res) => {
         checkOutDate: req.body.checkOutDate
     }
 
-    if (!memberModel) {
-        return res.status(400).json({msg: "Body is invalid, please provide data for whole model"}) //This could be a bug
+    if (!bookingModel.title || !bookingModel.firstName || !bookingModel.surname || !bookingModel.email || !bookingModel.checkInDate || !bookingModel.checkOutDate) {
+        return res.status(400).json({msg: "Body of request is missing values, please provide all values for booking model"})
     }
 
-    bookings.push(memberModel);
-    res.json(memberModel);
+    bookings.push(bookingModel);
+    res.json(bookingModel);
 
 });
 
